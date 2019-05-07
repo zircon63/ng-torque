@@ -1,0 +1,34 @@
+{
+  "compileOnSave": false,
+  "compilerOptions": {
+    "baseUrl": "./",
+    "outDir": "./dist/out-tsc",
+    "sourceMap": true,
+    "declaration": false,
+    "module": "es2015",
+    "moduleResolution": "node",
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "importHelpers": true,
+    "target": "es5",
+    "strict": true,
+    "typeRoots": [
+      "node_modules/@types"
+    ],
+    "lib": [
+      "es2018",
+      "dom"
+    ],
+    "paths": {
+      "um-components/*": [
+        "projects/umnikum-components/src/lib/*"
+      ],
+      "um-examination-app/*": [
+        "projects/umnikum-examination-app/*"
+      ],
+      "ng-torque/*": [
+        "projects/ng-torque/src/lib/*"
+      ]
+    }
+  }
+}
