@@ -10,7 +10,6 @@
     "version:patch": "npm version patch && git push --tags && npm run changelog",
     "changelog": "conventional-changelog -p umnikum-component-lib -i CHANGELOG.md -s -r 0 && git add CHANGELOG.md && git commit -m \"docs(changelog): update\" && git push"
   },
-  "private": true,
   "dependencies": {
     "@angular/animations": "^7.2.14",
     "@angular/cdk": "^7.3.7",
