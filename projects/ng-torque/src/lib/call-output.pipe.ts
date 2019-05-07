@@ -1,5 +1,5 @@
 import {ChangeDetectorRef, EmbeddedViewRef, Pipe, PipeTransform} from '@angular/core';
-import {EventHandlerClosure} from 'ng-torque/entity/component-dynamic.entity';
+import {EventHandlerClosure} from './entity/component-dynamic.entity';
 
 
 @Pipe({

@@ -1,5 +1,4 @@
 import {
-  ChangeDetectorRef,
   ComponentFactoryResolver,
   Directive,
   Injector,
@@ -18,8 +17,8 @@ import {
   NG_VALIDATORS,
   NG_VALUE_ACCESSOR
 } from '@angular/forms';
-import {NgTorDynamicComponentDirective} from 'ng-torque/directives/ng-tor-dynamic-component.directive';
-import {ComponentDynamicEntity, InputComponent, OutputComponent} from 'ng-torque/entity/component-dynamic.entity';
+import {ComponentDynamicEntity, InputComponent, OutputComponent} from '../entity/component-dynamic.entity';
+import {NgTorDynamicComponentDirective} from './ng-tor-dynamic-component.directive';
 
 @Directive({
   selector: '[ngTorDynamicControl]',
@@ -36,10 +35,9 @@ export class NgTorDynamicControlDirective<T> extends NgTorDynamicComponentDirect
     protected templateRef: TemplateRef<never>,
     protected viewRef: ViewContainerRef,
     protected injector: Injector,
-    protected resolver: ComponentFactoryResolver,
-    protected cdRef: ChangeDetectorRef
+    protected resolver: ComponentFactoryResolver
   ) {
-    super(templateRef, viewRef, injector, resolver, cdRef);
+    super(templateRef, viewRef, injector, resolver);
   }
 
   public ngOnChanges(changes: SimpleChanges): void {

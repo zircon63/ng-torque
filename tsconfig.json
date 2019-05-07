@@ -18,17 +18,6 @@
     "lib": [
       "es2018",
       "dom"
-    ],
-    "paths": {
-      "um-components/*": [
-        "projects/umnikum-components/src/lib/*"
-      ],
-      "um-examination-app/*": [
-        "projects/umnikum-examination-app/*"
-      ],
-      "ng-torque/*": [
-        "projects/ng-torque/src/lib/*"
-      ]
-    }
+    ]
   }
 }

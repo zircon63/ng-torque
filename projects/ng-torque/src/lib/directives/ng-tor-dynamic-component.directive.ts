@@ -1,5 +1,4 @@
 import {
-  ChangeDetectorRef,
   ComponentFactoryResolver,
   Directive,
   DoCheck,
@@ -12,7 +11,8 @@ import {
   Type,
   ViewContainerRef
 } from '@angular/core';
-import {ComponentDynamicEntity, InputComponent, OutputComponent} from 'ng-torque/entity/component-dynamic.entity';
+import {ComponentDynamicEntity, InputComponent, OutputComponent} from '../entity/component-dynamic.entity';
+
 
 @Directive({
   selector: '[ngTorDynamicComponent]',
@@ -28,8 +28,7 @@ export class NgTorDynamicComponentDirective<T> implements OnChanges, DoCheck {
     protected templateRef: TemplateRef<never>,
     protected viewRef: ViewContainerRef,
     protected injector: Injector,
-    protected resolver: ComponentFactoryResolver,
-    protected cdRef: ChangeDetectorRef
+    protected resolver: ComponentFactoryResolver
   ) {
   }
 

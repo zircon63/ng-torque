@@ -10,9 +10,10 @@ import {
   TemplateRef,
   ViewContainerRef
 } from '@angular/core';
-import {TemplateContext, TemplateDynamicEntity} from 'ng-torque/entity/template-dynamic.entity';
-import {ITemplateContainer, TEMPLATE_CONTAINER} from 'ng-torque/template-container/template-container.component';
 import {Subscription} from 'rxjs';
+import {TemplateContext, TemplateDynamicEntity} from '../entity/template-dynamic.entity';
+import {ITemplateContainer, TEMPLATE_CONTAINER} from '../template-container/template-container.component';
+
 
 @Directive({
   selector: '[ngTorDynamicTemplate]',
