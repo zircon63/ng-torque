@@ -3,13 +3,16 @@ import {ComponentFactoryResolver, InjectionToken, TemplateRef, Type} from '@angu
 export const TEMPLATE_CONTAINER = new InjectionToken('TEMPLATE_CONTAINER');
 
 export function provideTemplateContainer<T>(ctor: Type<T>) {
-  return {
+  return createTemplateContainer(ctor);
+}
+
+const createTemplateContainer = <T>(ctor: Type<T>) =>
+  ({
     provide: TEMPLATE_CONTAINER,
     useFactory: (factory: ComponentFactoryResolver) => factory.resolveComponentFactory(ctor),
     deps: [ComponentFactoryResolver],
     multi: true
-  };
-}
+  });
 
 export interface ITemplateContainer {
   resolveTemplateRef(): {
