@@ -1,5 +1,6 @@
 import {
   ComponentFactory,
+  ComponentRef,
   Directive,
   Inject,
   Input,
@@ -10,9 +11,8 @@ import {
   TemplateRef,
   ViewContainerRef
 } from '@angular/core';
-import {Subscription} from 'rxjs';
 import {TemplateContext, TemplateDynamicEntity} from '../entity/template-dynamic.entity';
-import {ITemplateContainer, TEMPLATE_CONTAINER} from '../template-container/template-container.component';
+import {ITemplateContainerReference, TEMPLATE_CONTAINER} from '../template-container/template-container.component';
 
 
 @Directive({
@@ -24,11 +24,15 @@ export class NgTorDynamicTemplateDirective<T extends string> implements OnChange
   @Input('ngTorDynamicTemplateContext') public context!: TemplateContext<T>;
   @Input('ngTorDynamicTemplateContainer') public container!: string;
   public entity!: TemplateDynamicEntity<T>;
-  private initContainer$!: Subscription;
+  private templateContainerRef!: ComponentRef<ITemplateContainerReference> | undefined;
 
   constructor(protected viewRef: ViewContainerRef,
-              @Optional() @Inject(TEMPLATE_CONTAINER) private factories: ComponentFactory<ITemplateContainer>[]
+              @Optional() @Inject(TEMPLATE_CONTAINER) private factories: ComponentFactory<ITemplateContainerReference>[]
   ) {
+  }
+
+  get templateContainer(): ITemplateContainerReference | undefined {
+    return this.templateContainerRef ? this.templateContainerRef.instance : undefined;
   }
 
   public ngOnChanges(changes: SimpleChanges): void {
@@ -38,9 +42,9 @@ export class NgTorDynamicTemplateDirective<T extends string> implements OnChange
       if (this.factories) {
         const factory = this.factories.find(f => f.selector === this.container);
         if (factory) {
-          const componentRef = this.viewRef.createComponent(factory);
-          this.viewRef.remove(this.viewRef.indexOf(componentRef.hostView));
-          const templateMap = componentRef.instance.resolveTemplateRef();
+          this.templateContainerRef = this.viewRef.createComponent(factory);
+          this.viewRef.remove(this.viewRef.indexOf(this.templateContainerRef.hostView));
+          const templateMap = this.templateContainerRef.instance.resolveTemplateRef();
           this.template = templateMap[nameTemplate];
         } else {
           throw new Error('Cannot find container with selector: ' + this.container);
@@ -48,7 +52,6 @@ export class NgTorDynamicTemplateDirective<T extends string> implements OnChange
       } else {
         throw new Error('Not provide by token TEMPLATE_CONTAINER !');
       }
-
     }
     this.entity = new TemplateDynamicEntity({
       type: this.template,
@@ -59,8 +62,8 @@ export class NgTorDynamicTemplateDirective<T extends string> implements OnChange
   }
 
   public ngOnDestroy(): void {
-    if (this.initContainer$) {
-      this.initContainer$.unsubscribe();
+    if (this.templateContainerRef) {
+      this.templateContainerRef.destroy();
     }
   }
 }
