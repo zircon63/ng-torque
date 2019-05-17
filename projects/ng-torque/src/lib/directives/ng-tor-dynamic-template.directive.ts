@@ -12,7 +12,7 @@ import {
   ViewContainerRef
 } from '@angular/core';
 import {TemplateContext, TemplateDynamicEntity} from '../entity/template-dynamic.entity';
-import {ITemplateContainerReference, TEMPLATE_CONTAINER} from '../template-container/template-container.component';
+import {ITemplateContainer, TEMPLATE_CONTAINER} from '../template-container/template-container.component';
 
 
 @Directive({
@@ -24,14 +24,14 @@ export class NgTorDynamicTemplateDirective<T extends string> implements OnChange
   @Input('ngTorDynamicTemplateContext') public context!: TemplateContext<T>;
   @Input('ngTorDynamicTemplateContainer') public container!: string;
   public entity!: TemplateDynamicEntity<T>;
-  private templateContainerRef!: ComponentRef<ITemplateContainerReference> | undefined;
+  private templateContainerRef!: ComponentRef<ITemplateContainer> | undefined;
 
   constructor(protected viewRef: ViewContainerRef,
-              @Optional() @Inject(TEMPLATE_CONTAINER) private factories: ComponentFactory<ITemplateContainerReference>[]
+              @Optional() @Inject(TEMPLATE_CONTAINER) private factories: ComponentFactory<ITemplateContainer>[]
   ) {
   }
 
-  get templateContainer(): ITemplateContainerReference | undefined {
+  get templateContainer(): ITemplateContainer | undefined {
     return this.templateContainerRef ? this.templateContainerRef.instance : undefined;
   }
 
@@ -43,7 +43,6 @@ export class NgTorDynamicTemplateDirective<T extends string> implements OnChange
         const factory = this.factories.find(f => f.selector === this.container);
         if (factory) {
           this.templateContainerRef = this.viewRef.createComponent(factory);
-          this.viewRef.remove(this.viewRef.indexOf(this.templateContainerRef.hostView));
           const templateMap = this.templateContainerRef.instance.resolveTemplateRef();
           this.template = templateMap[nameTemplate];
         } else {

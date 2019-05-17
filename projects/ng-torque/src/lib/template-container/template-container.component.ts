@@ -14,14 +14,8 @@ const createTemplateContainer = <T>(ctor: Type<T>) =>
     multi: true
   });
 
-export interface ITemplateContainerReference {
+export interface ITemplateContainer {
   resolveTemplateRef(): {
     [name: string]: TemplateRef<any>
-  };
-}
-
-export interface ITemplateContainerViewChildren {
-  resolveViewChildren(): {
-    [name: string]: any
   };
 }

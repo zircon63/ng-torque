@@ -33,18 +33,6 @@ export class NgTorDynamicComponentDirective<T> implements OnChanges, DoCheck {
   }
 
   public ngOnChanges(changes: SimpleChanges): void {
-    const {previousValue, currentValue} = changes.input;
-    const simpleChanges: SimpleChanges = {};
-    Object
-      .keys(this.input)
-      .filter(key => (previousValue && previousValue[key]) !== currentValue[key])
-      .forEach(key => {
-        const prev = previousValue && previousValue[key];
-        const current = currentValue[key];
-        simpleChanges[key] = new SimpleChange(prev, current, changes.input.isFirstChange());
-      });
-
-
     if (changes.type) {
       this.viewRef.clear();
       this.entity = new ComponentDynamicEntity({
@@ -65,9 +53,21 @@ export class NgTorDynamicComponentDirective<T> implements OnChanges, DoCheck {
     }
 
     if (changes.input) {
-      this.entity.input = changes.input.currentValue;
-      this.entity.attachInputs();
-      this.entity.ngOnChanges(simpleChanges);
+      const {previousValue, currentValue} = changes.input;
+      const simpleChanges: SimpleChanges = {};
+      if (currentValue) {
+        Object
+          .keys(this.input)
+          .filter(key => (previousValue && previousValue[key]) !== currentValue[key])
+          .forEach(key => {
+            const prev = previousValue && previousValue[key];
+            const current = currentValue[key];
+            simpleChanges[key] = new SimpleChange(prev, current, changes.input.isFirstChange());
+          });
+        this.entity.input = changes.input.currentValue;
+        this.entity.attachInputs();
+        this.entity.ngOnChanges(simpleChanges);
+      }
     }
 
     if (changes.output) {
