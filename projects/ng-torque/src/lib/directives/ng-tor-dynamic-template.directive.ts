@@ -14,24 +14,26 @@ import {
 import {TemplateContext, TemplateDynamicEntity} from '../entity/template-dynamic.entity';
 import {ITemplateContainer, TEMPLATE_CONTAINER} from '../template-container/template-container.component';
 
+export type TemplateContainerInstace<T> = T & ITemplateContainer;
+export type TemplateContainerRef<T> = ComponentRef<TemplateContainerInstace<T>>;
 
 @Directive({
   selector: '[ngTorDynamicTemplate]',
   exportAs: 'ngTorDynamicTemplate'
 })
-export class NgTorDynamicTemplateDirective<T extends string> implements OnChanges, OnDestroy {
+export class NgTorDynamicTemplateDirective<T extends string, I extends ITemplateContainer> implements OnChanges, OnDestroy {
   @Input('ngTorDynamicTemplate') public template!: TemplateRef<TemplateContext<T>> | string;
   @Input('ngTorDynamicTemplateContext') public context!: TemplateContext<T>;
   @Input('ngTorDynamicTemplateContainer') public container!: string;
   public entity!: TemplateDynamicEntity<T>;
-  private templateContainerRef!: ComponentRef<ITemplateContainer> | undefined;
+  private templateContainerRef!: TemplateContainerRef<I> | undefined;
 
   constructor(protected viewRef: ViewContainerRef,
-              @Optional() @Inject(TEMPLATE_CONTAINER) private factories: ComponentFactory<ITemplateContainer>[]
+              @Optional() @Inject(TEMPLATE_CONTAINER) private factories: ComponentFactory<I>[]
   ) {
   }
 
-  get templateContainer(): ITemplateContainer | undefined {
+  get templateContainer(): TemplateContainerInstace<I> | undefined {
     return this.templateContainerRef ? this.templateContainerRef.instance : undefined;
   }
 
