@@ -1,18 +1,6 @@
-import {ComponentFactoryResolver, InjectionToken, TemplateRef, Type} from '@angular/core';
+import {ComponentFactory, InjectionToken, TemplateRef} from '@angular/core';
 
-export const TEMPLATE_CONTAINER = new InjectionToken('TEMPLATE_CONTAINER');
-
-export function provideTemplateContainer<T>(ctor: Type<T>) {
-  return createTemplateContainer(ctor);
-}
-
-const createTemplateContainer = <T>(ctor: Type<T>) =>
-  ({
-    provide: TEMPLATE_CONTAINER,
-    useFactory: (factory: ComponentFactoryResolver) => factory.resolveComponentFactory(ctor),
-    deps: [ComponentFactoryResolver],
-    multi: true
-  });
+export const TEMPLATE_CONTAINER = new InjectionToken<ComponentFactory<ITemplateContainer>>('TEMPLATE_CONTAINER');
 
 export interface ITemplateContainer {
   resolveTemplateRef(): {

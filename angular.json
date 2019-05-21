@@ -37,6 +37,133 @@
           }
         }
       }
+    },
+    "playbook": {
+      "root": "projects/playbook/",
+      "sourceRoot": "projects/playbook/src",
+      "projectType": "application",
+      "prefix": "um-book",
+      "schematics": {
+        "@schematics/angular:class": {
+          "skipTests": true
+        },
+        "@schematics/angular:component": {
+          "skipTests": true,
+          "styleext": "scss",
+          "changeDetection": "OnPush"
+        },
+        "@schematics/angular:directive": {
+          "skipTests": true
+        },
+        "@schematics/angular:guard": {
+          "skipTests": true
+        },
+        "@schematics/angular:module": {
+          "skipTests": true
+        },
+        "@schematics/angular:pipe": {
+          "skipTests": true
+        },
+        "@schematics/angular:service": {
+          "skipTests": true
+        }
+      },
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/playbook",
+            "index": "projects/playbook/src/index.html",
+            "main": "projects/playbook/src/main.ts",
+            "polyfills": "projects/playbook/src/polyfills.ts",
+            "tsConfig": "projects/playbook/tsconfig.app.json",
+            "assets": [
+              "projects/playbook/src/assets"
+            ],
+            "stylePreprocessorOptions": {
+              "includePaths": [
+                "projects/umnikum-components/src/lib/assets/styles",
+                "projects/playbook/src/assets/styles"
+              ]
+            },
+            "scripts": [],
+            "es5BrowserSupport": true
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "projects/playbook/src/environments/environment.ts",
+                  "with": "projects/playbook/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "playbook:build"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "playbook:build:production"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "playbook:build"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/playbook/src/test.ts",
+            "polyfills": "projects/playbook/src/polyfills.ts",
+            "tsConfig": "projects/playbook/tsconfig.spec.json",
+            "karmaConfig": "projects/playbook/karma.conf.js",
+            "styles": [
+              "projects/playbook/src/styles.css"
+            ],
+            "scripts": [],
+            "assets": [
+              "projects/playbook/src/favicon.ico",
+              "projects/playbook/src/assets",
+              "projects/umnikum-components/src/lib/assets"
+            ]
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/playbook/tsconfig.app.json",
+              "projects/playbook/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
     }
   },
   "defaultProject": "ng-torque"
