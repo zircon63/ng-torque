@@ -10,7 +10,7 @@ export type MapType<T = any> = Map<string, Type<T>>;
 export const TEMPLATE_CONTAINER = new InjectionToken<MapTypeItem<any>>('TEMPLATE_CONTAINER');
 export const MAP_TYPE_TEMPLATE = new InjectionToken<Map<string, Type<any>>>('MAP_TYPE_TEMPLATE');
 
-export function provideTemplateContainer<T>(values: MapTypeItem<T>[]) {
+export function provideTemplateContainer(values: MapTypeItem<any>[]) {
   const templateProviders = values.map(value => {
     return {
       provide: TEMPLATE_CONTAINER,
