@@ -1,5 +1,5 @@
 import {
-  ComponentFactory,
+  ComponentFactoryResolver,
   ComponentRef,
   Directive,
   Inject,
@@ -9,10 +9,11 @@ import {
   Optional,
   SimpleChanges,
   TemplateRef,
+  Type,
   ViewContainerRef
 } from '@angular/core';
 import {TemplateContext, TemplateDynamicEntity} from '../entity/template-dynamic.entity';
-import {ITemplateContainer, TEMPLATE_CONTAINER} from '../template-container/template-container.component';
+import {ITemplateContainer, MAP_TYPE_TEMPLATE, MapType} from '../template-container/template-container.component';
 
 export type TemplateContainerInstace<T> = T & ITemplateContainer;
 export type TemplateContainerRef<T> = ComponentRef<TemplateContainerInstace<T>>;
@@ -29,11 +30,12 @@ export class NgTorDynamicTemplateDirective<T extends string, I extends ITemplate
   private templateContainerRef!: TemplateContainerRef<I> | undefined;
 
   constructor(protected viewRef: ViewContainerRef,
-              @Optional() @Inject(TEMPLATE_CONTAINER) private factories: ComponentFactory<I>[]
+              private factoryResolver: ComponentFactoryResolver,
+              @Optional() @Inject(MAP_TYPE_TEMPLATE) private mapType: MapType
   ) {
   }
 
-  get templateContainer(): TemplateContainerInstace<I> | undefined {
+  get templateContainer(): I | undefined {
     return this.templateContainerRef ? this.templateContainerRef.instance : undefined;
   }
 
@@ -41,14 +43,17 @@ export class NgTorDynamicTemplateDirective<T extends string, I extends ITemplate
     this.viewRef.clear();
     if (TemplateDynamicEntity.isKey(this.template)) {
       const nameTemplate: string = this.template;
-      if (this.factories) {
-        const factory = this.factories.find(f => f.selector === this.container);
-        if (factory) {
-          this.templateContainerRef = this.viewRef.createComponent(factory);
-          const templateMap = this.templateContainerRef.instance.resolveTemplateRef();
-          this.template = templateMap[nameTemplate];
-        } else {
-          throw new Error('Cannot find container with selector: ' + this.container);
+      if (this.mapType) {
+        const type = this.mapType.get(this.container);
+        if (type) {
+          const factory = this.factoryResolver.resolveComponentFactory(type as Type<I>);
+          if (factory) {
+            this.templateContainerRef = this.viewRef.createComponent(factory);
+            const templateMap = this.templateContainerRef.instance.resolveTemplateRef();
+            this.template = templateMap[nameTemplate];
+          } else {
+            throw new Error('Cannot find container with selector: ' + this.container);
+          }
         }
       } else {
         throw new Error('Not provide by token TEMPLATE_CONTAINER !');
