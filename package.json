@@ -4,8 +4,8 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng build",
-    "deploy": "ng build && npm run version:patch && npm publish",
+    "build": "ng build --project=ng-torque",
+    "deploy": "npm run build && cd dist && npm publish",
     "lint": "ng lint",
     "e2e": "ng e2e",
     "version:patch": "npm version patch && git push --tags && npm run changelog",
