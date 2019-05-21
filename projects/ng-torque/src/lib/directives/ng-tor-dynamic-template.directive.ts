@@ -47,13 +47,11 @@ export class NgTorDynamicTemplateDirective<T extends string, I extends ITemplate
         const type = this.mapType.get(this.container);
         if (type) {
           const factory = this.factoryResolver.resolveComponentFactory(type as Type<I>);
-          if (factory) {
-            this.templateContainerRef = this.viewRef.createComponent(factory);
-            const templateMap = this.templateContainerRef.instance.resolveTemplateRef();
-            this.template = templateMap[nameTemplate];
-          } else {
-            throw new Error('Cannot find container with selector: ' + this.container);
-          }
+          this.templateContainerRef = this.viewRef.createComponent(factory);
+          const templateMap = this.templateContainerRef.instance.resolveTemplateRef();
+          this.template = templateMap[nameTemplate];
+        } else {
+          throw new Error('Cannot find container with selector: ' + this.container);
         }
       } else {
         throw new Error('Not provide by token TEMPLATE_CONTAINER !');
