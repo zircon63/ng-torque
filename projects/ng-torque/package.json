@@ -1,6 +1,25 @@
 {
   "name": "ng-torque",
   "version": "0.0.12",
+  "author": {
+    "email": "canek1702@gmail.com",
+    "name": "Alexandr Murashkin"
+  },
+  "description": "Angular library for easy use dynamic components",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zircon63/ng-torque.git"
+  },
+  "maintainers": [
+    {
+      "name": "zircon63",
+      "email": "canek1702@gmail.com"
+    }
+  ],
+  "bugs": {
+    "url": "https://github.com/zircon63/ng-torque/issues"
+  },
+  "homepage": "https://github.com/zircon63/ng-torque",
   "peerDependencies": {
     "@angular/common": "^7.2.0",
     "@angular/core": "^7.2.0",
