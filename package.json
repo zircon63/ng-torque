@@ -1,6 +1,25 @@
 {
   "name": "ng-torque",
   "version": "0.0.0",
+  "author": {
+    "email": "canek1702@gmail.com",
+    "name": "Alexandr Murashkin"
+  },
+  "description": "Angular library for easy use dynamic components",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zircon63/ng-torque.git"
+  },
+  "maintainers": [
+    {
+      "name": "zircon63",
+      "email": "canek1702@gmail.com"
+    }
+  ],
+  "bugs": {
+    "url": "https://github.com/zircon63/ng-torque/issues"
+  },
+  "homepage": "https://github.com/zircon63/ng-torque",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
@@ -12,48 +31,48 @@
     "changelog": "conventional-changelog -p umnikum-component-lib -i CHANGELOG.md -s -r 0 && git add CHANGELOG.md && git commit -m \"docs(changelog): update\" && git push"
   },
   "dependencies": {
-    "@angular/animations": "7.2.14",
-    "@angular/cdk": "7.3.7",
-    "@angular/common": "7.2.14",
-    "@angular/compiler": "7.2.14",
-    "@angular/core": "7.2.14",
-    "@angular/forms": "7.2.14",
-    "@angular/material": "7.3.7",
-    "@angular/platform-browser": "7.2.14",
-    "@angular/platform-browser-dynamic": "7.2.14",
-    "@angular/router": "7.2.14",
-    "core-js": "2.6.5",
+    "@angular/animations": "8.2.0",
+    "@angular/cdk": "8.1.2",
+    "@angular/common": "8.2.0",
+    "@angular/compiler": "8.2.0",
+    "@angular/core": "8.2.0",
+    "@angular/forms": "8.2.0",
+    "@angular/material": "8.1.2",
+    "@angular/platform-browser": "8.2.0",
+    "@angular/platform-browser-dynamic": "8.2.0",
+    "@angular/router": "8.2.0",
+    "core-js": "3.1.4",
     "hammerjs": "2.0.8",
-    "rxjs": "6.3.3",
-    "zone.js": "~0.8.26"
+    "rxjs": "6.5.2",
+    "zone.js": "~0.9.1"
   },
   "devDependencies": {
-    "@angular-devkit/build-angular": "^0.13.8",
-    "@angular-devkit/build-ng-packagr": "0.13.0",
-    "@angular/cli": "7.3.8",
-    "@angular/compiler-cli": "7.2.14",
-    "@angular/language-service": "7.2.14",
-    "@types/core-js": "2.5.0",
-    "@types/jasmine": "^3.3.12",
+    "@angular-devkit/build-angular": "~0.802.0",
+    "@angular-devkit/build-ng-packagr": "~0.802.0",
+    "@angular/cli": "8.2.0",
+    "@angular/compiler-cli": "8.2.0",
+    "@angular/language-service": "8.2.0",
+    "@types/core-js": "2.5.2",
+    "@types/jasmine": "^3.3.16",
     "@types/jasminewd2": "^2.0.6",
-    "@types/node": "^12.0.0",
-    "@types/webpack-env": "^1.13.9",
+    "@types/node": "^12.6.9",
+    "@types/webpack-env": "^1.14.0",
     "codelyzer": "^5.0.1",
-    "conventional-changelog": "^3.1.8",
-    "conventional-changelog-cli": "^2.0.21",
+    "conventional-changelog": "^3.1.10",
+    "conventional-changelog-cli": "^2.0.23",
     "jasmine-core": "^3.4.0",
     "jasmine-spec-reporter": "^4.2.1",
-    "karma": "^4.1.0",
-    "karma-chrome-launcher": "^2.2.0",
-    "karma-coverage-istanbul-reporter": "^2.0.5",
+    "karma": "^4.2.0",
+    "karma-chrome-launcher": "^3.0.0",
+    "karma-coverage-istanbul-reporter": "^2.1.0",
     "karma-jasmine": "^2.0.1",
     "karma-jasmine-html-reporter": "^1.4.2",
-    "ng-packagr": "^5.1.0",
+    "ng-packagr": "^5.3.0",
     "protractor": "^5.4.2",
-    "ts-node": "^8.1.0",
-    "tsickle": "0.34.0",
-    "tslib": "^1.9.3",
-    "tslint": "^5.16.0",
-    "typescript": "3.2.4"
+    "ts-node": "^8.3.0",
+    "tsickle": "^0.36.0",
+    "tslib": "^1.10.0",
+    "tslint": "^5.18.0",
+    "typescript": "3.5.3"
   }
 }
