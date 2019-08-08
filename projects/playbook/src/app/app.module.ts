@@ -2,23 +2,26 @@ import {NgModule} from '@angular/core';
 import {MatCheckbox, MatCheckboxModule, MatRadioButton, MatRadioModule} from '@angular/material';
 import {BrowserModule} from '@angular/platform-browser';
 import {NgTorqueModule} from '../../../ng-torque/src/lib/ng-torque.module';
+import {provideMapTypeTemplate, provideTemplateContainer} from '../../../ng-torque/src/lib/template-container/template-container.component';
 import {AComponent} from './a.component';
 
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
 import {BComponent} from './b.component';
-import {DynamicDirective} from './dynamic.directive';
+import {ContentResolverDirective} from './content-resolver.directive';
 import {WrapperComponent} from './wrapper.component';
-import { ContentDirective } from './content.directive';
+import {ContentDirective} from './content.directive';
+import {TemplateContainerComponent} from './template-container.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    DynamicDirective,
+    ContentResolverDirective,
     AComponent,
     BComponent,
     WrapperComponent,
-    ContentDirective
+    ContentDirective,
+    TemplateContainerComponent
   ],
   imports: [
     BrowserModule,
@@ -27,12 +30,19 @@ import { ContentDirective } from './content.directive';
     MatCheckboxModule,
     MatRadioModule
   ],
-  providers: [],
+  providers: [
+    provideTemplateContainer({
+      name: 'test-container',
+      type: TemplateContainerComponent
+    }),
+    provideMapTypeTemplate()
+  ],
   entryComponents: [AComponent,
     BComponent,
     WrapperComponent,
     MatRadioButton,
-    MatCheckbox
+    MatCheckbox,
+    TemplateContainerComponent
   ],
   bootstrap: [AppComponent]
 })

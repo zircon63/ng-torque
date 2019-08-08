@@ -1,5 +1,5 @@
 import {AfterContentInit, Component, OnInit} from '@angular/core';
-import {DynamicDirective} from './dynamic.directive';
+import {ContentResolverDirective} from './content-resolver.directive';
 
 @Component({
   selector: 'a',
@@ -16,15 +16,15 @@ import {DynamicDirective} from './dynamic.directive';
   `]
 })
 export class AComponent implements OnInit, AfterContentInit {
-  constructor(private dasd: DynamicDirective) {
+  constructor(private dasd: ContentResolverDirective) {
   }
 
-  ngOnInit() {
+  public ngOnInit() {
 
   }
 
-  ngAfterContentInit(): void {
-    this.dasd.ContentDirective.NgTorDynamicComponentDirective.entity.ref.instance.title = 'Hello world';
+  public ngAfterContentInit(): void {
+    this.dasd.contentDirective.ngTorDynamicComponentDirective.entity.ref.instance.title = 'Hello world';
   }
 
 }

@@ -13,7 +13,7 @@ import {Component, Input, OnInit} from '@angular/core';
   `]
 })
 export class BComponent implements OnInit {
-  @Input() title: string;
+  @Input() title!: string;
 
   constructor() {
   }

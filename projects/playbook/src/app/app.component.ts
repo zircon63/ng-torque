@@ -9,12 +9,12 @@ import {BComponent} from './b.component';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'playbook';
-  entities: ComponentDynamicEntity[] = [];
-  entityA = new ComponentDynamicEntity({
+  public title = 'playbook';
+  public entities: ComponentDynamicEntity<any>[] = [];
+  public entityA = new ComponentDynamicEntity({
     type: AComponent
   });
-  entityB = new ComponentDynamicEntity({
+  public entityB = new ComponentDynamicEntity({
     type: BComponent
   });
 

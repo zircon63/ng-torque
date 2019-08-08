@@ -5,6 +5,8 @@
     </ng-container>
   </ng-container>
 
+  <ng-container *ngTorDynamicTemplate="'helloView'; context {title: 'USER'}; container 'test-container'"></ng-container>
+
   <wrapper content #wrapper>
     <ng-container *ngTorDynamicComponent="entityB.type">
       <ng-container *ngTorDynamicTemplate="composed; context {user: 'John', view: view}"></ng-container>

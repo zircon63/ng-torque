@@ -10,7 +10,7 @@ import {Component, OnInit, TemplateRef, ViewChild} from '@angular/core';
   styles: []
 })
 export class WrapperComponent implements OnInit {
-  @ViewChild(TemplateRef, {static: true, read: TemplateRef}) public content: TemplateRef;
+  @ViewChild(TemplateRef, {static: true, read: TemplateRef}) public content!: TemplateRef<any>;
 
   constructor() {
   }
