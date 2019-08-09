@@ -1,22 +1,22 @@
 import {AfterContentInit, Component, OnInit} from '@angular/core';
-import {ContentResolverDirective} from './content-resolver.directive';
+import {TemplateContainerComponent} from './template-container.component';
 
 @Component({
   selector: 'a',
   template: `
-      <p>
-          a works!
-      </p>
-      <ng-content></ng-content>
+    <p>
+      a works!
+    </p>
+    <ng-content></ng-content>
   `,
   styles: [`
-      p {
-          color: firebrick;
-      }
+    p {
+      color: firebrick;
+    }
   `]
 })
 export class AComponent implements OnInit, AfterContentInit {
-  constructor(private dasd: ContentResolverDirective) {
+  constructor(public testContainer: TemplateContainerComponent) {
   }
 
   public ngOnInit() {
@@ -24,7 +24,7 @@ export class AComponent implements OnInit, AfterContentInit {
   }
 
   public ngAfterContentInit(): void {
-    this.dasd.contentDirective.ngTorDynamicComponentDirective.entity.ref.instance.title = 'Hello world';
+    console.log(this);
   }
 
 }

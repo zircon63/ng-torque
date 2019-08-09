@@ -9,9 +9,11 @@ import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
 import {BComponent} from './b.component';
 import {ContentResolverDirective} from './content-resolver.directive';
-import {WrapperComponent} from './wrapper.component';
 import {ContentDirective} from './content.directive';
 import {TemplateContainerComponent} from './template-container.component';
+import {WrapperComponent} from './wrapper.component';
+import { TemplateResolverPipe } from './template-resolver.pipe';
+import { CComponent } from './c.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +23,9 @@ import {TemplateContainerComponent} from './template-container.component';
     BComponent,
     WrapperComponent,
     ContentDirective,
-    TemplateContainerComponent
+    TemplateContainerComponent,
+    TemplateResolverPipe,
+    CComponent,
   ],
   imports: [
     BrowserModule,
@@ -42,7 +46,8 @@ import {TemplateContainerComponent} from './template-container.component';
     WrapperComponent,
     MatRadioButton,
     MatCheckbox,
-    TemplateContainerComponent
+    TemplateContainerComponent,
+    CComponent
   ],
   bootstrap: [AppComponent]
 })
