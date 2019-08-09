@@ -1,4 +1,4 @@
-<dynamic-wrapper componentResolver
+<!--<dynamic-wrapper componentResolver
                  viewQuery
                  [type]="entityA.type"
                  [input]="{
@@ -13,7 +13,14 @@
                    [type]="entityB.type">
     <ng-container *ngTorDynamicTemplate="item;context {item: 1}"></ng-container>
   </dynamic-wrapper>
-</dynamic-wrapper>
+</dynamic-wrapper>-->
+
+<dynamic-wrapper
+  componentResolver
+  viewQuery
+  [type]="entityB.type"
+  [formControl]="control"
+></dynamic-wrapper>
 
 <ng-template #item let-item="item">
   Item: {{item}}

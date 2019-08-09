@@ -1,4 +1,5 @@
 import {AfterContentInit, Component, Input, OnInit} from '@angular/core';
+import {ControlValueAccessor, NG_VALUE_ACCESSOR} from '@angular/forms';
 import {provideContentQuery} from './content.directive';
 import {Query2Directive} from './query2.directive';
 
@@ -14,11 +15,18 @@ import {Query2Directive} from './query2.directive';
       }
   `],
   providers: [
-    provideContentQuery(Query2Directive)
+    provideContentQuery(Query2Directive),
+    {
+      provide: NG_VALUE_ACCESSOR,
+      useClass: BComponent,
+      multi: true
+    }
   ]
 })
-export class BComponent implements OnInit, AfterContentInit {
+export class BComponent implements OnInit, AfterContentInit, ControlValueAccessor {
   @Input() title!: string;
+  change = () => {
+  };
 
   constructor(private query: Query2Directive) {
   }
@@ -28,6 +36,20 @@ export class BComponent implements OnInit, AfterContentInit {
 
   ngAfterContentInit(): void {
     console.log(this);
+  }
+
+  registerOnChange(fn: any): void {
+    this.change = fn;
+  }
+
+  registerOnTouched(fn: any): void {
+  }
+
+  setDisabledState(isDisabled: boolean): void {
+  }
+
+  writeValue(obj: any): void {
+    console.log(obj);
   }
 
 }

@@ -1,4 +1,5 @@
 import {NgModule} from '@angular/core';
+import {ReactiveFormsModule} from '@angular/forms';
 import {MatCheckbox, MatCheckboxModule, MatRadioButton, MatRadioModule} from '@angular/material';
 import {BrowserModule} from '@angular/platform-browser';
 import {NgTorqueModule} from '../../../ng-torque/src/lib/ng-torque.module';
@@ -10,6 +11,7 @@ import {BComponent} from './b.component';
 import {CComponent} from './c.component';
 import {ContentResolverDirective} from './content-resolver.directive';
 import {ContentDirective} from './content.directive';
+import {ControlDirective} from './control.directive';
 import {Query1Directive} from './query1.directive';
 import {Query2Directive} from './query2.directive';
 import {TemplateResolverPipe} from './template-resolver.pipe';
@@ -25,6 +27,7 @@ import {WrapperComponent} from './wrapper.component';
     ContentDirective,
     Query1Directive,
     Query2Directive,
+    ControlDirective,
     TemplateResolverPipe,
     CComponent,
   ],
@@ -33,7 +36,8 @@ import {WrapperComponent} from './wrapper.component';
     AppRoutingModule,
     NgTorqueModule,
     MatCheckboxModule,
-    MatRadioModule
+    MatRadioModule,
+    ReactiveFormsModule
   ],
   providers: [],
   entryComponents: [AComponent,
