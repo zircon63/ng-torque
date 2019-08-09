@@ -23,4 +23,8 @@ export class AppComponent {
       type: AComponent
     }));
   }
+
+  public pushed() {
+    alert('PUSH');
+  }
 }

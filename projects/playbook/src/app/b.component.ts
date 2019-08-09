@@ -1,4 +1,6 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {AfterContentInit, Component, Input, OnInit} from '@angular/core';
+import {provideContentQuery} from './content.directive';
+import {Query2Directive} from './query2.directive';
 
 @Component({
   selector: 'b',
@@ -10,15 +12,22 @@ import {Component, Input, OnInit} from '@angular/core';
       p {
           color: darkgreen;
       }
-  `]
+  `],
+  providers: [
+    provideContentQuery(Query2Directive)
+  ]
 })
-export class BComponent implements OnInit {
+export class BComponent implements OnInit, AfterContentInit {
   @Input() title!: string;
 
-  constructor() {
+  constructor(private query: Query2Directive) {
   }
 
   ngOnInit() {
+  }
+
+  ngAfterContentInit(): void {
+    console.log(this);
   }
 
 }

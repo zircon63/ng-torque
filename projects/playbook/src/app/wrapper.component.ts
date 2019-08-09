@@ -1,7 +1,7 @@
-import {Component, OnInit, TemplateRef, ViewChild} from '@angular/core';
+import {Component, OnInit, TemplateRef, ViewChild, ViewContainerRef} from '@angular/core';
 
 @Component({
-  selector: 'wrapper',
+  selector: 'dynamic-wrapper',
   template: `
       <ng-template>
           <ng-content></ng-content>
@@ -12,7 +12,7 @@ import {Component, OnInit, TemplateRef, ViewChild} from '@angular/core';
 export class WrapperComponent implements OnInit {
   @ViewChild(TemplateRef, {static: true, read: TemplateRef}) public content!: TemplateRef<any>;
 
-  constructor() {
+  constructor(public viewRef: ViewContainerRef) {
   }
 
   ngOnInit() {
