@@ -1,18 +1,21 @@
-<ng-container contentResolver>
-  <ng-container *ngFor="let entity of entities">
-    <ng-container *ngTorDynamicComponent="entity.type">
-      <ng-container *ngTorDynamicTemplate="wrapper.content"></ng-container>
+<ng-container *ngFor="let entity of entities">
+  <app-template-container #ngContent>
+    <ng-container *ngTorDynamicComponent="entity.type;">
+      <ng-container
+        *ngTorDynamicTemplate="'helloView' | templateResolver: ngContent;"></ng-container>
     </ng-container>
-  </ng-container>
+  </app-template-container>
+</ng-container>
 
-  <ng-container *ngTorDynamicTemplate="'helloView'; context {title: 'USER'}; container 'test-container'"></ng-container>
 
-  <wrapper content #wrapper>
-    <ng-container *ngTorDynamicComponent="entityB.type">
-      <ng-container *ngTorDynamicTemplate="composed; context {user: 'John', view: view}"></ng-container>
+<!--  <wrapper contentQuery #contentQuery="contentQuery">
+    <ng-container *ngTorDynamicComponent="entityB.type;">
+      <h2>Hello from CONTENT-TEMPLATE 1</h2>
     </ng-container>
   </wrapper>
-</ng-container>
+  <wrapper contentQuery #contentQuery="contentQuery">
+    <h2>Hello from CONTENT-TEMPLATE 2</h2>
+  </wrapper>-->
 
 
 <ng-template #view let-name="name">
@@ -24,3 +27,4 @@
   <h2>Hi</h2>
   <ng-container *ngTorDynamicTemplate="view; context { name: user}"></ng-container>
 </ng-template>
+
