@@ -16,11 +16,16 @@
 </dynamic-wrapper>-->
 
 <dynamic-wrapper
+  dynamicControl
+  [control]="control"
   componentResolver
   viewQuery
   [type]="entityB.type"
-  [formControl]="control"
 ></dynamic-wrapper>
+{{control.valid}}
+<pre>
+  {{control.value | json}}
+</pre>
 
 <ng-template #item let-item="item">
   Item: {{item}}

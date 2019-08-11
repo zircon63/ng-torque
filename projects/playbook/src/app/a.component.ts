@@ -1,5 +1,5 @@
 import {AfterContentInit, Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {provideContentQuery} from './content.directive';
+import {provideViewQuery} from '../../../ng-torque/src/lib/directives/view-query.directive';
 import {Query1Directive} from './query1.directive';
 
 @Component({
@@ -18,7 +18,7 @@ import {Query1Directive} from './query1.directive';
       }
   `],
   providers: [
-    provideContentQuery(Query1Directive)
+    provideViewQuery(Query1Directive)
   ]
 })
 export class AComponent implements OnInit, AfterContentInit {

@@ -10,20 +10,20 @@ import {
   SimpleChanges,
   Type
 } from '@angular/core';
-import {ComponentDynamicEntity, InputComponent, OutputComponent} from '../../../ng-torque/src/lib/entity/component-dynamic.entity';
-import {WrapperComponent} from './wrapper.component';
+import {DynamicWrapperComponent} from '../dynamic-wrapper/dynamic-wrapper.component';
+import {ComponentDynamicEntity, InputComponent, OutputComponent} from '../entity/component-dynamic.entity';
 
 @Directive({
   selector: '[componentResolver]'
 })
-export class ContentResolverDirective<T> implements OnChanges, DoCheck {
+export class ComponentResolverDirective<T = any> implements OnChanges, DoCheck {
   @Input() public type!: Type<T>;
   @Input() public input!: InputComponent<T>;
   @Input() public output!: OutputComponent<T>;
   public entity!: ComponentDynamicEntity<T>;
 
 
-  constructor(@Host() public wrapper: WrapperComponent,
+  constructor(@Host() public wrapper: DynamicWrapperComponent,
               private injector: Injector,
               private resolver: ComponentFactoryResolver) {
   }

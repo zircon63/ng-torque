@@ -9,25 +9,17 @@ import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
 import {BComponent} from './b.component';
 import {CComponent} from './c.component';
-import {ContentResolverDirective} from './content-resolver.directive';
-import {ContentDirective} from './content.directive';
-import {ControlDirective} from './control.directive';
 import {Query1Directive} from './query1.directive';
 import {Query2Directive} from './query2.directive';
 import {TemplateResolverPipe} from './template-resolver.pipe';
-import {WrapperComponent} from './wrapper.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    ContentResolverDirective,
     AComponent,
     BComponent,
-    WrapperComponent,
-    ContentDirective,
     Query1Directive,
     Query2Directive,
-    ControlDirective,
     TemplateResolverPipe,
     CComponent,
   ],
@@ -42,7 +34,6 @@ import {WrapperComponent} from './wrapper.component';
   providers: [],
   entryComponents: [AComponent,
     BComponent,
-    WrapperComponent,
     MatRadioButton,
     MatCheckbox,
     CComponent

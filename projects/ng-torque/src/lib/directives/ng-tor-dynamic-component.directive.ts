@@ -13,7 +13,9 @@ import {
 } from '@angular/core';
 import {ComponentDynamicEntity, InputComponent, OutputComponent} from '../entity/component-dynamic.entity';
 
-
+/*
+* @deprecated
+* */
 @Directive({
   selector: '[ngTorDynamicComponent]',
   exportAs: 'ngTorDynamicComponent'
