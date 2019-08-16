@@ -7,17 +7,19 @@
 - [x] Dynamic content projection
 - [x] Dynamic `FormControl` binding
 
-##Installation
+## Installation
+
 ```bash
 $ npm install ng-torque --save
 ```
 
-##Usage
+## Usage
 
-###Dynamic Components
- ##Before Usage
+### Dynamic Components
+ ## Before Usage
  1. Import NgTorqueModule
  2. Declare dynamic entities by factory function provideDynamicEntities
+
  ```ts
 @NgModule({
   declarations: [
@@ -35,8 +37,9 @@ $ npm install ng-torque --save
   bootstrap: [AppComponent]
 })
  ```
-####Simple
+#### Simple
 Then in your component's template include <dynamic-wrapper componentResolver> where you want to render component and bind from your component class type of component to render:
+
 ```ts
 @Component({
   selector: 'app-test',
@@ -51,10 +54,11 @@ export class TestComponent {
   public dynamicEntity: Type<AComponent> = AComponent;
 }
 ```
-####Binding Input/Output
+#### Binding Input/Output
 You can also pass input and output to your dynamic component 
 
 ***AComponent***
+
 ```ts
 @Component({
   selector: 'a',
@@ -78,10 +82,12 @@ export class AComponent {
 ```
 
 ***TestComponent***
+
 Create variable dynamicEntity: ComponentDynamicEntity with type: `AComponent`,
 input with same fields in `AComponent`, and use `callOutput` Pipe for binding output handler `increseCounter`.
 
 Arg `$event` in pipe use for map `EventEmmiter` value, i.e this equal:
+
 ```ts
 <a (count)="increaseCounter($event, parentValue)"></a>
 ```
@@ -118,13 +124,15 @@ export class TestComponent {
 
 }
 ```
-####Dynamic Content
+#### Dynamic Content
 You can also use content projection for your dynamic component.
 
 If you need resolve `@ContentChild/ @ContentChildren` in your dynamic component - use `viewQuery` directive.
+
 ***ViewQueryDirective***
 
 If you use the component not only for dynamics, you must use `@Optional()` for inject ViewQuery.
+
 ```ts
 @Directive({
   selector: '[viewQuery]',
@@ -139,6 +147,7 @@ export class Query1Directive extends ViewQueryDirective {
 
 }
 ```
+
 ***CComponent***
 ```ts
 @Component({
@@ -158,6 +167,7 @@ export class CComponent {
 
 Use function `provideViewQuery` for provide yours ViewQuery implementation. 
 If you use the component not only for dynamics, you must use `@Optional()` for inject ViewQuery.
+
 ```ts
 @Component({
   selector: 'a',
@@ -183,15 +193,18 @@ export class AComponent implements AfterContentInit {
 ```
 
 It's example equal native content-projection:
+
 ```ts
 <a>
     <app-c></app-c>
 </a>
 ```
 
-####Dynamic Control
+#### Dynamic Control
 You can use `dynamicControl` directive for binding `FormControl` on your dynamic component which implements `ControlValueAccessor`.
+
 ***BComponent***
+
 ```ts
 
 @Component({
@@ -255,6 +268,7 @@ export class BComponent implements OnInit, ControlValueAccessor, Validator {
 }
 ```
 ***TestComponent***
+
 ```ts
 <dynamic-wrapper
   dynamicControl
@@ -264,9 +278,9 @@ export class BComponent implements OnInit, ControlValueAccessor, Validator {
 ></dynamic-wrapper>
 ```
 
-###Dynamic Templates
+### Dynamic Templates
 
-####Template Containers
+#### Template Containers
 
 Template container represents `TemplateRef` registry for dynamic resolving in your components.
 
@@ -293,6 +307,7 @@ Before usage need provide containers and map by functions:
 })
 ```
 ***ContainerComponent***
+
 ```ts
 @Component({
   selector: 'container',
@@ -314,6 +329,7 @@ export class ContainerComponent implements ITemplateContainer {
 }
 ```
 ***TestComponent***
+
 ```ts
 @Component({
   selector: 'app-test',
@@ -328,7 +344,7 @@ export class TestComponent {
 ```
 
 
-####Utils
+#### Utils
 
 ***mapFactory***
 
