@@ -1,4 +1,14 @@
-import {ChangeDetectorRef, ComponentFactory, ComponentRef, DoCheck, EventEmitter, OnChanges, SimpleChanges, Type} from '@angular/core';
+import {
+  ANALYZE_FOR_ENTRY_COMPONENTS,
+  ChangeDetectorRef,
+  ComponentFactory,
+  ComponentRef,
+  DoCheck,
+  EventEmitter,
+  OnChanges,
+  SimpleChanges,
+  Type
+} from '@angular/core';
 import {Subscription} from 'rxjs';
 
 export type EventHandlerClosure = (event: any) => any;
@@ -35,6 +45,10 @@ export function hasLifeCycleHook(context: any, name: LifeCycleHook): boolean {
   }
 
   return false;
+}
+
+export function provideDynamicEntities(types: Type<any>[]) {
+  return {provide: ANALYZE_FOR_ENTRY_COMPONENTS, useValue: types, multi: true};
 }
 
 

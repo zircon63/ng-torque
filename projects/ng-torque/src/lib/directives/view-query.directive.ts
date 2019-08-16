@@ -9,14 +9,10 @@ export function provideViewQuery<T>(type: Type<T>) {
   };
 }
 
-export function ViewQueryDef() {
-  return Directive({
-    selector: '[viewQuery]',
-    exportAs: 'viewQuery'
-  });
-}
-
-@ViewQueryDef()
+@Directive({
+  selector: '[viewQuery]',
+  exportAs: 'viewQuery'
+})
 export class ViewQueryDirective {
   constructor(@Host() public hostWrapper: DynamicWrapperComponent) {
   }

@@ -15,7 +15,7 @@
   </dynamic-wrapper>
 </dynamic-wrapper>-->
 
-<dynamic-wrapper
+<!--<dynamic-wrapper
   dynamicControl
   [control]="control"
   componentResolver
@@ -25,19 +25,17 @@
 {{control.valid}}
 <pre>
   {{control.value | json}}
-</pre>
+</pre>-->
 
-<ng-template #item let-item="item">
-  Item: {{item}}
-</ng-template>
+<ng-container *ngTorDynamicTemplate="'greeting' from 'container'"></ng-container>
+<!--
+<ng-container composedView>
+  <ng-template viewDef="login" let-login="login">
+    Login: {{login}}
+  </ng-template>
 
-<ng-template #view let-name="name">
-  <h2>View {{name}}</h2>
-</ng-template>
-
-
-<ng-template #composed let-user="user" let-view="view">
   <h2>Hi</h2>
-  <ng-container *ngTorDynamicTemplate="view; context { name: user}"></ng-container>
-</ng-template>
+  <ng-template *viewResolve="'login'"></ng-template>
+</ng-container>
+-->
 

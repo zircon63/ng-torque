@@ -1,9 +1,12 @@
-import {ContentChild, Host} from '@angular/core';
+import {ContentChild, Directive, Host} from '@angular/core';
 import {NgTorDynamicTemplateDirective} from '../../../ng-torque/src/lib/directives/ng-tor-dynamic-template.directive';
-import {ViewQueryDef, ViewQueryDirective} from '../../../ng-torque/src/lib/directives/view-query.directive';
+import {ViewQueryDirective} from '../../../ng-torque/src/lib/directives/view-query.directive';
 import {DynamicWrapperComponent} from '../../../ng-torque/src/lib/dynamic-wrapper/dynamic-wrapper.component';
 
-@ViewQueryDef()
+@Directive({
+  selector: '[viewQuery]',
+  exportAs: 'viewQuery'
+})
 export class Query2Directive extends ViewQueryDirective {
   @ContentChild(NgTorDynamicTemplateDirective, {
     static: false,

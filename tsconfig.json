@@ -5,6 +5,7 @@
     "downlevelIteration": true,
     "outDir": "./dist/out-tsc",
     "sourceMap": true,
+    "rootDir": ".",
     "declaration": false,
     "module": "esnext",
     "moduleResolution": "node",
@@ -20,5 +21,8 @@
       "es2018",
       "dom"
     ]
+  },
+  "angularCompilerOptions": {
+    "enableIvy": false
   }
 }
