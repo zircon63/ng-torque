@@ -1,4 +1,4 @@
-import {InjectionToken, TemplateRef, Type} from '@angular/core';
+import {ANALYZE_FOR_ENTRY_COMPONENTS, InjectionToken, TemplateRef, Type} from '@angular/core';
 
 export interface MapItem<K, V> {
   key: K;
@@ -10,11 +10,18 @@ export const TEMPLATE_CONTAINER = new InjectionToken<MapItem<string, any>>('TEMP
 export const MAP_TYPE_TEMPLATE = new InjectionToken<Map<string, Type<any>>>('MAP_TYPE_TEMPLATE');
 
 export function provideTemplateContainer(value: MapItem<string, Type<any>>) {
-  return {
-    provide: TEMPLATE_CONTAINER,
-    useValue: value,
-    multi: true
-  };
+  return [
+    {
+      provide: TEMPLATE_CONTAINER,
+      useValue: value,
+      multi: true
+    },
+    {
+      provide: ANALYZE_FOR_ENTRY_COMPONENTS,
+      useValue: value,
+      multi: true
+    }
+  ];
 }
 
 export function provideMapTypeTemplate() {
@@ -22,6 +29,22 @@ export function provideMapTypeTemplate() {
     provide: MAP_TYPE_TEMPLATE,
     useFactory: mapFactory,
     deps: [TEMPLATE_CONTAINER]
+  };
+}
+
+export function provideMapValue<K, V>(tokenMapItem: any, value: MapItem<K, V>) {
+  return {
+    provide: tokenMapItem,
+    useValue: value,
+    multi: true
+  };
+}
+
+export function provideMap(tokenMapItem: any, tokenMap: any) {
+  return {
+    provide: tokenMap,
+    useFactory: mapFactory,
+    deps: [tokenMapItem]
   };
 }
 
