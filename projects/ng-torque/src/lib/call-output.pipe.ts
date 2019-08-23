@@ -13,7 +13,7 @@ export class CallOutputPipe implements PipeTransform {
     this.context = context;
   }
 
-  public transform(value: Function, args?: Array<any>): EventHandlerClosure {
+  public transform(value: (...args: any) => void, args?: Array<any>): EventHandlerClosure {
     return (event: any) => {
       let ARGS = [];
       if (args) {

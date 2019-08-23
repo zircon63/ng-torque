@@ -2,36 +2,38 @@ import {
   ComponentFactoryResolver,
   Directive,
   DoCheck,
+  Host,
   Injector,
   Input,
   OnChanges,
   SimpleChange,
   SimpleChanges,
-  TemplateRef,
-  Type,
-  ViewContainerRef
+  Type
 } from '@angular/core';
+import {DynamicWrapperComponent} from '../dynamic-wrapper/dynamic-wrapper.component';
 import {ComponentDynamicEntity, InputComponent, OutputComponent} from '../entity/component-dynamic.entity';
 
-/*
-* @deprecated
-* */
 @Directive({
-  selector: '[ngTorDynamicComponent]',
-  exportAs: 'ngTorDynamicComponent'
+  selector: '[componentResolver]'
 })
-export class NgTorDynamicComponentDirective<T> implements OnChanges, DoCheck {
-  @Input('ngTorDynamicComponent') public type!: Type<T>;
-  @Input('ngTorDynamicComponentInput') public input!: InputComponent<T>;
-  @Input('ngTorDynamicComponentOutput') public output!: OutputComponent<T>;
+export class ComponentResolverDirective<T = any> implements OnChanges, DoCheck {
+  @Input() public type!: Type<T>;
+  @Input() public input!: InputComponent<T>;
+  @Input() public output!: OutputComponent<T>;
   public entity!: ComponentDynamicEntity<T>;
 
-  constructor(
-    protected templateRef: TemplateRef<never>,
-    protected viewRef: ViewContainerRef,
-    protected injector: Injector,
-    protected resolver: ComponentFactoryResolver
-  ) {
+
+  constructor(@Host() public wrapper: DynamicWrapperComponent,
+              private injector: Injector,
+              private resolver: ComponentFactoryResolver) {
+  }
+
+  get viewRef() {
+    return this.wrapper.viewRef;
+  }
+
+  get templateRef() {
+    return this.wrapper.content;
   }
 
   public ngOnChanges(changes: SimpleChanges): void {
@@ -53,7 +55,6 @@ export class NgTorDynamicComponentDirective<T> implements OnChanges, DoCheck {
       this.entity.setFactory(this.entity.factory);
       this.entity.setComponentRef(componentRef);
     }
-
     if (changes.input) {
       const {previousValue, currentValue} = changes.input;
       const simpleChanges: SimpleChanges = {};
@@ -81,5 +82,5 @@ export class NgTorDynamicComponentDirective<T> implements OnChanges, DoCheck {
   public ngDoCheck(): void {
     this.entity.ngDoCheck();
   }
-}
 
+}

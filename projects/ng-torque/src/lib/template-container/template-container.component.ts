@@ -1,33 +1,55 @@
-import {InjectionToken, TemplateRef, Type} from '@angular/core';
+import {ANALYZE_FOR_ENTRY_COMPONENTS, InjectionToken, TemplateRef, Type} from '@angular/core';
 
-
-export interface MapTypeItem<T> {
-  type: T;
-  name: string;
+export interface MapItem<K, V> {
+  key: K;
+  value: V;
 }
 
 export type MapType<T = any> = Map<string, Type<T>>;
-export const TEMPLATE_CONTAINER = new InjectionToken<MapTypeItem<any>>('TEMPLATE_CONTAINER');
+export const TEMPLATE_CONTAINER = new InjectionToken<MapItem<string, any>>('TEMPLATE_CONTAINER');
 export const MAP_TYPE_TEMPLATE = new InjectionToken<Map<string, Type<any>>>('MAP_TYPE_TEMPLATE');
 
-export function provideTemplateContainer(value: MapTypeItem<any>) {
-  return {
-    provide: TEMPLATE_CONTAINER,
-    useValue: value,
-    multi: true
-  };
+export function provideTemplateContainer(value: MapItem<string, Type<any>>) {
+  return [
+    {
+      provide: TEMPLATE_CONTAINER,
+      useValue: value,
+      multi: true
+    },
+    {
+      provide: ANALYZE_FOR_ENTRY_COMPONENTS,
+      useValue: value,
+      multi: true
+    }
+  ];
 }
 
 export function provideMapTypeTemplate() {
   return {
     provide: MAP_TYPE_TEMPLATE,
-    useFactory: mapTypeFactory,
+    useFactory: mapFactory,
     deps: [TEMPLATE_CONTAINER]
   };
 }
 
-export function mapTypeFactory(containers: MapTypeItem<any>[]) {
-  return containers.reduce((config, item) => config.set(item.name, item.type), new Map());
+export function provideMapValue<K, V>(tokenMapItem: any, value: MapItem<K, V>) {
+  return {
+    provide: tokenMapItem,
+    useValue: value,
+    multi: true
+  };
+}
+
+export function provideMap(tokenMapItem: any, tokenMap: any) {
+  return {
+    provide: tokenMap,
+    useFactory: mapFactory,
+    deps: [tokenMapItem]
+  };
+}
+
+export function mapFactory<K, V>(items: MapItem<K, V>[]) {
+  return items.reduce((map, item) => map.set(item.key, item.value), new Map());
 }
 
 export interface ITemplateContainer {

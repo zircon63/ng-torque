@@ -20,6 +20,9 @@ import {
 import {ComponentDynamicEntity, InputComponent, OutputComponent} from '../entity/component-dynamic.entity';
 import {NgTorDynamicComponentDirective} from './ng-tor-dynamic-component.directive';
 
+/*
+* @deprecated
+* */
 @Directive({
   selector: '[ngTorDynamicControl]',
   exportAs: 'ngTorDynamicControl'

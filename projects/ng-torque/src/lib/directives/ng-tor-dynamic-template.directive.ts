@@ -25,7 +25,7 @@ export type TemplateContainerRef<T> = ComponentRef<TemplateContainerInstace<T>>;
 export class NgTorDynamicTemplateDirective<T extends string, I extends ITemplateContainer> implements OnChanges, OnDestroy {
   @Input('ngTorDynamicTemplate') public template!: TemplateRef<TemplateContext<T>> | string;
   @Input('ngTorDynamicTemplateContext') public context!: TemplateContext<T>;
-  @Input('ngTorDynamicTemplateContainer') public container!: string;
+  @Input('ngTorDynamicTemplateFrom') public container!: string;
   public entity!: TemplateDynamicEntity<T>;
   private templateContainerRef!: TemplateContainerRef<I> | undefined;
 
@@ -49,7 +49,11 @@ export class NgTorDynamicTemplateDirective<T extends string, I extends ITemplate
           const factory = this.factoryResolver.resolveComponentFactory(type as Type<I>);
           this.templateContainerRef = this.viewRef.createComponent(factory);
           const templateMap = this.templateContainerRef.instance.resolveTemplateRef();
-          this.template = templateMap[nameTemplate];
+          if (nameTemplate in templateMap) {
+            this.template = templateMap[nameTemplate];
+          } else {
+            throw new Error(`Cannot find template: ${nameTemplate} in container ${this.container}`);
+          }
         } else {
           throw new Error('Cannot find container with selector: ' + this.container);
         }
