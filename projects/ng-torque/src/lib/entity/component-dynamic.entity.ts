@@ -59,7 +59,7 @@ export class ComponentDynamicEntity<T> implements IComponentDynamicEntity<T>, On
   public ref!: ComponentRef<T>;
   public factory!: ComponentFactory<T>;
   private changeDetectorRef!: ChangeDetectorRef;
-  private attachedOutputs!: Subscription[];
+  private attachedOutputs: Subscription[] = [];
 
   constructor(data: IComponentDynamicEntity<T>) {
     this.type = data.type;
@@ -99,7 +99,7 @@ export class ComponentDynamicEntity<T> implements IComponentDynamicEntity<T>, On
 
   public attachOutputs() {
     this.checkExistReference();
-    this.attachedOutputs = [];
+    this.clearAttachedOutputs();
     this.factory.outputs.forEach((output) => {
       if (this.output) {
         if (output.propName in this.output) {
@@ -110,10 +110,12 @@ export class ComponentDynamicEntity<T> implements IComponentDynamicEntity<T>, On
         }
       }
     });
-    this.ref.onDestroy(() => {
-      this.attachedOutputs.forEach(s => s.unsubscribe());
-      this.attachedOutputs.splice(0);
-    });
+    this.ref.onDestroy(() => this.clearAttachedOutputs());
+  }
+
+  private clearAttachedOutputs() {
+    this.attachedOutputs.forEach(s => s.unsubscribe());
+    this.attachedOutputs.splice(0);
   }
 
   private checkExistReference(): void {

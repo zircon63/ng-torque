@@ -40,7 +40,7 @@ import {ViewResolveDirective} from './view-resolve.directive';
     ReactiveFormsModule
   ],
   providers: [
-    provideDynamicEntities([CComponent]),
+    provideDynamicEntities([AComponent, CComponent]),
     provideTemplateContainer({
       key: 'container',
       value: CComponent

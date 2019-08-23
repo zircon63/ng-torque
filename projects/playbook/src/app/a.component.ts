@@ -16,16 +16,13 @@ import {Query1Directive} from './query1.directive';
       p {
           color: firebrick;
       }
-  `],
-  providers: [
-    provideViewQuery(Query1Directive)
-  ]
+  `]
 })
 export class AComponent implements OnInit, AfterContentInit {
   @Input() title!: string;
   @Output() public push: EventEmitter<any> = new EventEmitter<any>();
 
-  constructor(private query: Query1Directive) {
+  constructor() {
   }
 
   public ngOnInit() {
@@ -33,7 +30,6 @@ export class AComponent implements OnInit, AfterContentInit {
   }
 
   public ngAfterContentInit(): void {
-    console.log(this.query);
   }
 
 }

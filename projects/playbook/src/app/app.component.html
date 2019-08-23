@@ -1,41 +1,9 @@
-<!--<dynamic-wrapper componentResolver
-                 viewQuery
-                 [type]="entityA.type"
-                 [input]="{
-                  title: 'zxc'
-                 }"
-                 [output]="{
-                  push: pushed | callOutput
-                 }"
->
-  <dynamic-wrapper componentResolver
-                   viewQuery #d
-                   [type]="entityB.type">
-    <ng-container *ngTorDynamicTemplate="item;context {item: 1}"></ng-container>
-  </dynamic-wrapper>
-</dynamic-wrapper>-->
-
-<!--<dynamic-wrapper
-  dynamicControl
-  [control]="control"
-  componentResolver
-  viewQuery
-  [type]="entityB.type"
-></dynamic-wrapper>
-{{control.valid}}
-<pre>
-  {{control.value | json}}
-</pre>-->
-
-<ng-container *ngTorDynamicTemplate="'greeting' from 'container'"></ng-container>
-<!--
-<ng-container composedView>
-  <ng-template viewDef="login" let-login="login">
-    Login: {{login}}
-  </ng-template>
-
-  <h2>Hi</h2>
-  <ng-template *viewResolve="'login'"></ng-template>
+<ng-container *ngFor="let item of array; let $index = index">
+  <ng-container
+    *ngTorDynamicComponent="entityA.type;
+                            input {title: 'test' + item};
+                            output {
+                              push: pushed | callOutput: [$index]
+                            }">
+  </ng-container>
 </ng-container>
--->
-

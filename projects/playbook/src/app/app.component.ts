@@ -19,6 +19,7 @@ export class AppComponent {
   public entityB = new ComponentDynamicEntity({
     type: BComponent
   });
+  public array = new Array(3).fill(0).map((val, index) => index);
 
   constructor() {
     this.entities.push(new ComponentDynamicEntity({
@@ -27,7 +28,8 @@ export class AppComponent {
     this.control.disable();
   }
 
-  public pushed() {
-    alert('PUSH');
+  public pushed(index: number) {
+    console.log(`Remove index:${index}`);
+    this.array.splice(index, 1);
   }
 }
