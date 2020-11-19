@@ -1,10 +1,22 @@
 {
   "name": "ng-torque",
-  "version": "0.0.16",
+  "version": "0.0.17",
   "author": {
     "email": "canek1702@gmail.com",
     "name": "Alexandr Murashkin"
   },
+  "keywords": [
+    "angular",
+    "ng",
+    "dynamic-input",
+    "dynamic-output",
+    "dynamic-content-projection",
+    "dynamic-form-control",
+    "angular-components",
+    "dynamic-components",
+    "dynamic-templates",
+    "typescript"
+  ],
   "description": "Angular library for easy use dynamic components",
   "repository": {
     "type": "git",
