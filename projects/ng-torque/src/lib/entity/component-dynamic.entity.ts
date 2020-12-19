@@ -51,7 +51,6 @@ export function provideDynamicEntities(types: Type<any>[]) {
   return {provide: ANALYZE_FOR_ENTRY_COMPONENTS, useValue: types, multi: true};
 }
 
-
 export class ComponentDynamicEntity<T> implements IComponentDynamicEntity<T>, OnChanges, DoCheck {
   public input?: InputComponent<T>;
   public output?: OutputComponent<T>;

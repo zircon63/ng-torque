@@ -32,6 +32,9 @@
     "url": "https://github.com/zircon63/ng-torque/issues"
   },
   "homepage": "https://github.com/zircon63/ng-torque",
+  "dependencies": {
+    "tslib": "^2.0.0"
+  },
   "peerDependencies": {
     "@angular/common": ">=6 <=11",
     "@angular/core": ">=6 <=11",

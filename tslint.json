@@ -4,6 +4,12 @@
     "codelyzer"
   ],
   "rules": {
+    "align": {
+      "options": [
+        "parameters",
+        "statements"
+      ]
+    },
     "array-type": false,
     "arrow-parens": false,
     "arrow-return-shorthand": [
@@ -22,6 +28,7 @@
       "rxjs/Rx"
     ],
     "interface-name": true,
+    "eofline": true,
     "max-classes-per-file": [
       true,
       1
@@ -30,7 +37,13 @@
       true,
       140
     ],
+    "import-spacing": true,
     "increment-decrement": true,
+    "indent": {
+      "options": [
+        "spaces"
+      ]
+    },
     "prefer-method-signature": true,
     "variable-name": [
       true,
@@ -80,7 +93,6 @@
     "no-non-null-assertion": false,
     "no-redundant-jsdoc": true,
     "no-switch-case-fall-through": true,
-    "no-use-before-declare": false,
     "no-var-requires": false,
     "no-duplicate-imports": true,
     "radix": true,
@@ -105,13 +117,55 @@
     "trailing-comma": false,
     "no-output-on-prefix": true,
     "no-inputs-metadata-property": true,
+    "semicolon": {
+      "options": [
+        "always"
+      ]
+    },
+    "space-before-function-paren": {
+      "options": {
+        "anonymous": "never",
+        "asyncArrow": "always",
+        "constructor": "never",
+        "method": "never",
+        "named": "never"
+      }
+    },
     "no-outputs-metadata-property": true,
     "no-host-metadata-property": true,
     "no-input-rename": true,
     "no-output-rename": true,
+    "typedef-whitespace": {
+      "options": [
+        {
+          "call-signature": "nospace",
+          "index-signature": "nospace",
+          "parameter": "nospace",
+          "property-declaration": "nospace",
+          "variable-declaration": "nospace"
+        },
+        {
+          "call-signature": "onespace",
+          "index-signature": "onespace",
+          "parameter": "onespace",
+          "property-declaration": "onespace",
+          "variable-declaration": "onespace"
+        }
+      ]
+    },
     "use-lifecycle-interface": true,
     "use-pipe-transform-interface": true,
     "component-class-suffix": true,
-    "directive-class-suffix": true
+    "directive-class-suffix": true,
+    "whitespace": {
+      "options": [
+        "check-branch",
+        "check-decl",
+        "check-operator",
+        "check-separator",
+        "check-type",
+        "check-typecast"
+      ]
+    }
   }
 }
