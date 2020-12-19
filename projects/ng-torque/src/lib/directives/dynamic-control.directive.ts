@@ -1,11 +1,12 @@
 import {Directive, Host, Input, OnChanges, SimpleChanges} from '@angular/core';
 import {
+  AsyncValidator, AsyncValidatorFn,
   ControlValueAccessor,
   FormControl,
   FormControlDirective,
   NG_ASYNC_VALIDATORS,
   NG_VALIDATORS,
-  NG_VALUE_ACCESSOR
+  NG_VALUE_ACCESSOR, Validator, ValidatorFn
 } from '@angular/forms';
 import {ComponentResolverDirective} from './component-resolver.directive';
 
@@ -25,8 +26,8 @@ export class DynamicControlDirective
   }
 
   public ngOnChanges(changes: SimpleChanges): void {
-    const rawValidators = this.entityRef.injector.get(NG_VALIDATORS, null);
-    const rawAsyncValidators = this.entityRef.injector.get(NG_ASYNC_VALIDATORS, null);
+    const rawValidators = this.entityRef.injector.get<Array<Validator | ValidatorFn>>(NG_VALIDATORS, []);
+    const rawAsyncValidators = this.entityRef.injector.get<Array<AsyncValidator | AsyncValidatorFn>>(NG_ASYNC_VALIDATORS, []);
     const valueAccessors = this.entityRef.injector.get<ControlValueAccessor[]>(NG_VALUE_ACCESSOR);
     const formControlDirective = new FormControlDirective(rawValidators, rawAsyncValidators, valueAccessors, null);
     formControlDirective.form = this.formControl;

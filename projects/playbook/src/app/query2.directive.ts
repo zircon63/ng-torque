@@ -9,9 +9,8 @@ import {DynamicWrapperComponent} from '../../../ng-torque/src/lib/dynamic-wrappe
 })
 export class Query2Directive extends ViewQueryDirective {
   @ContentChild(NgTorDynamicTemplateDirective, {
-    static: false,
     read: NgTorDynamicTemplateDirective
-  }) public dir!: NgTorDynamicTemplateDirective<any, any>;
+}) public dir!: NgTorDynamicTemplateDirective<any, any>;
 
   constructor(@Host() public wrapperComponent: DynamicWrapperComponent) {
     super(wrapperComponent);

@@ -15,7 +15,12 @@
             "tsConfig": "projects/ng-torque/tsconfig.lib.json",
             "project": "projects/ng-torque/ng-package.json"
           }
-        },
+        ,          "configurations": {
+            "production": {
+              "tsConfig": "projects/ng-torque/tsconfig.lib.prod.json"
+            }
+          }
+},
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
